@@ -19,8 +19,11 @@ function App() {
       </div>
       <div>
       <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="name">Name: </label>
+                <input type="text"{...register("name")} />
+                <br />
                 <input type="file" {...register("file")} />
-
+                <br />
                 <input type="submit" />
             </form>
       </div>
