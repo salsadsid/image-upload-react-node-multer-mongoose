@@ -21,18 +21,19 @@ app.get('/file',async (req,res)=>{
   })
   
 app.post('/', upload.single('image'), (req, res, next) => {
-    console.log(req.body,req.file)
+    
 	const obj = {
 		name: req.body.name,
+		email:req.body.email,
 		img: {
 			data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
-			contentType: 'image/png'
+			contentType: req.file?.mimetype
 		}
 	}
 	User.create(obj)
 	.then ((err, item) => {
 		if (err) {
-			console.log(err);
+			// console.log(err,"DASD");y
 		}
 		else {
 			// item.save();
