@@ -6,31 +6,27 @@ const Home = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset
   } = useForm();
-  const [data, setData] = useState([]);
+  
   const [error, setError] = useState({
     isError: false,
     message: "",
   });
-  useEffect(() => {
-    fetch("http://localhost:8080/file")
-      .then((res) => res.json())
-      .then((data) => setData(data))
-      .catch((err) => console.log(err, "it has an error"));
-  });
-  const onSubmit = async (data) => {
+  
+  const onSubmit = (data) => {
     setError({
       isError: false,
       message: "",
     });
     const formData = new FormData();
     const file = data.file[0];
-    if(file.size >200800){
-        setError({
-            isError: true,
-            message: "Maximun size: 200Kb",
-          });
-          return;
+    if (file.size > 200800) {
+      setError({
+        isError: true,
+        message: "Maximun size: 200Kb",
+      });
+      return;
     }
     if (
       file.type == "image/webp" ||
@@ -42,17 +38,23 @@ const Home = () => {
       formData.append("name", data.name);
       formData.append("email", data.email);
       console.log(formData);
-      const res = await fetch("http://localhost:8080", {
+      fetch("http://localhost:8080", {
         method: "POST",
         body: formData,
-      }).then((res) => res.json());
-      alert(JSON.stringify(`${res.message}, status: ${res.status}`));
-    }else{
-        setError({
-            isError: true,
-            message: "Only png, jpeg, webp files are valid.",
-          });
-          return;
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if(data.success){
+            reset()
+          }
+          alert(JSON.stringify(`${data.success}, status: ${data.status}`));
+        });
+    } else {
+      setError({
+        isError: true,
+        message: "Only png, jpeg, webp files are valid.",
+      });
+      return;
     }
   };
 
@@ -106,20 +108,6 @@ const Home = () => {
 
           <input type="submit" className="btn btn-accent btn-sm" />
         </form>
-      </div>
-      <div>
-        {data?.map((singleData) => {
-          const base64String = btoa(
-            String.fromCharCode(...new Uint8Array(singleData.img.data.data))
-          );
-          return (
-            <>
-              <p>Name: {singleData.name}</p>
-              <p>Email: {singleData.email}</p>
-              <img src={`data:image/png;base64,${base64String}`} width="200" />
-            </>
-          );
-        })}
       </div>
     </div>
   );
