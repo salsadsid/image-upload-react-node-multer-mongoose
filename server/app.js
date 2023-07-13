@@ -5,13 +5,21 @@ const fs = require('fs');
 const User = require('./models/User');
 const upload = require('./middleware/uploader');
 const path = require('path');
+const bodyParser = require('body-parser');
 
-app.use(express.json());
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(cors());
 
 app.get("/", (req, res) => {
     res.send("server is alive!");
 });
+app.get('/file',async (req,res)=>{
+	const allData = await User.find()
+	res.json(allData)
+  })
+  
 app.post('/', upload.single('image'), (req, res, next) => {
     console.log(req.body,req.file)
 	const obj = {
