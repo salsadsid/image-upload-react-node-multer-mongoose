@@ -24,7 +24,7 @@ const Home = () => {
     if (file.size > 200800) {
       setError({
         isError: true,
-        message: "Maximun size: 200Kb",
+        message: "Maximun size: 200 Kb",
       });
       return;
     }
@@ -98,11 +98,15 @@ const Home = () => {
             <label htmlFor="name">Upload Profile Picture: </label>
             <input
               type="file"
-              {...register("file")}
+              {...register("file",{
+                required: "Profile picture is required",})}
               className="file-input normal-case file-input-bordered file-input-accent file-input-sm  max-w-xs"
             />
             {error.isError && (
               <small className="text-orange-700">{error.message}</small>
+            )}
+             {errors.file?.message && (
+              <small className="text-orange-700">{errors.file.message}</small>
             )}
           </div>
           {/* <label>
