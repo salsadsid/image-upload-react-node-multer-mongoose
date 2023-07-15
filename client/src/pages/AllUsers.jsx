@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { json } from "react-router-dom";
+import  { useEffect, useState } from "react";
 
 const AllUsers = () => {
   const [data, setData] = useState([]);
+  const [change, setChange] = useState(false);
   useEffect(() => {
     fetch("http://localhost:8080/file")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.log(err, "it has an error"));
-  }, []);
+  }, [change]);
 
   const handleDelete = (id) => {
     fetch(`http://localhost:8080/${id}`, {
       method: "DELETE",
     })
-      .then((res) => res, json())
-      .then((data) => console.log(data))
+      .then((res) => res.json())
+      .then((data) => {
+        if(data.success){
+          alert("Successfully Deleted.");
+        }
+      })
       .catch((err) => console.log(err, "it has an error"));
+
+      setChange((prevState)=>!prevState)
   };
   return (
-    <div className="overflow-x-auto max-w-lg mx-auto">
+    <div className="overflow-x-auto max-w-xl mx-auto">
       <div></div>
-      <table className="table table-xs">
+      <table className="table table-sm">
         <thead>
           <tr>
             <th></th>

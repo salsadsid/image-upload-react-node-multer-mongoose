@@ -46,8 +46,8 @@ const Home = () => {
         .then((data) => {
           if(data.success){
             reset()
+            alert("Successfully Added.");
           }
-          alert(JSON.stringify(`${data.success}, status: ${data.status}`));
         });
     } else {
       setError({
@@ -99,14 +99,33 @@ const Home = () => {
             <input
               type="file"
               {...register("file")}
-              className="file-input file-input-bordered file-input-accent file-input-sm  max-w-xs"
+              className="file-input normal-case file-input-bordered file-input-accent file-input-sm  max-w-xs"
             />
             {error.isError && (
               <small className="text-orange-700">{error.message}</small>
             )}
           </div>
-
-          <input type="submit" className="btn btn-accent btn-sm" />
+          {/* <label>
+            <input type="file" className="text-sm text-grey-500
+            file:mr-5 file:py-3 file:px-10
+            file:rounded-full file:border-0
+            file:text-md file:font-semibold  file:text-white
+            file:bg-gradient-to-r file:from-blue-600 file:to-amber-600
+            hover:file:cursor-pointer hover:file:opacity-80
+          " />
+        </label> */}
+        {/* <label>
+            <input type="file" class="text-sm text-grey-500
+            file:mr-5 file:py-2 file:px-6
+            file:rounded-full file:border-0
+            file:text-sm file:font-medium
+            file:bg-blue-50 file:text-blue-700
+            hover:file:cursor-pointer hover:file:bg-amber-50
+            hover:file:text-amber-700
+          " />
+        </label> */}
+          <input type="submit" className="btn normal-case btn-accent btn-sm" />
+          <p>After Added Successfully. Go users route to preview.</p>
         </form>
       </div>
     </div>
