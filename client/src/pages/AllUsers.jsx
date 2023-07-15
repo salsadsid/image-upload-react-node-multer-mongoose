@@ -4,14 +4,14 @@ const AllUsers = () => {
   const [data, setData] = useState([]);
   const [change, setChange] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:8080/file")
+    fetch("https://image-upload-xn1d.onrender.com/file")
       .then((res) => res.json())
       .then((data) => setData(data))
       .catch((err) => console.log(err, "it has an error"));
   }, [change]);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:8080/${id}`, {
+    fetch(`https://image-upload-xn1d.onrender.com/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

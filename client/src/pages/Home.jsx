@@ -38,7 +38,7 @@ const Home = () => {
       formData.append("name", data.name);
       formData.append("email", data.email);
       console.log(formData);
-      fetch("http://localhost:8080", {
+      fetch("https://image-upload-xn1d.onrender.com", {
         method: "POST",
         body: formData,
       })

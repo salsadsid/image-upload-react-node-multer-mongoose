@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", upload.single("image"), async (req, res, next) => {
-  console.log(req.file);
+ 
   const obj = {
     name: req.body.name,
     email: req.body.email,
@@ -54,17 +54,17 @@ app.post("/", upload.single("image"), async (req, res, next) => {
       success: true,
       data: result,
     });
-    const directory =
-      __dirname + "/uploads/"
-    fs.readdir(directory, (err, files) => {
-      if (err) throw err;
+    // const directory =
+    //   __dirname + "/uploads/"
+    // fs.readdir(directory, (err, files) => {
+    //   if (err) throw err;
 
-      for (const file of files) {
-        fs.unlink(path.join(directory, file), (err) => {
-          if (err) throw err;
-        });
-      }
-    });
+    //   for (const file of files) {
+    //     fs.unlink(path.join(directory, file), (err) => {
+    //       if (err) throw err;
+    //     });
+    //   }
+    // });
   } catch (error) {
     console.log(error);
   }

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const AllUsers2 = () => {
     // const [data, setData] = useState([]);
     // useEffect(() => {
-    //     fetch("http://localhost:8080/64b145dd53758362c9c21f14")
+    //     fetch("https://image-upload-xn1d.onrender.com/64b145dd53758362c9c21f14")
     //       .then((res) => res.json())
     //       .then(data=>console.log(data))
     //       .catch((err) => console.log(err, "it has an error"));
