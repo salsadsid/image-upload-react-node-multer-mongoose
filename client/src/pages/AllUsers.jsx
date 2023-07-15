@@ -24,6 +24,7 @@ const AllUsers = () => {
 
       setChange((prevState)=>!prevState)
   };
+  
   return (
     <div className="overflow-x-auto max-w-xl mx-auto">
       <div></div>
